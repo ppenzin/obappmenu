@@ -1,7 +1,18 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
-import obappmenu
+import os
+from obappmenu import obAppMenu
+
+HOMEDIR = os.path.expanduser('~/.config/openbox')
+RCNAME = 'obappmenurc.py'
+
+# A way to find local rcfile
+#if (os.path.isfile(os.path.join(HOMEDIR, RCNAME))):
+#  print "Found RC"
+#else:
+#  print "RC not found"
+# TODO where to store system rcfile?
 
 data = [
   {
@@ -28,7 +39,13 @@ data = [
     'name': 'Pidgin',
     'command': 'pidgin',
     'category': 'Internet',
+  },
+  {
+    'name': 'Gajim',
+    'command': 'gajim',
+    'category': 'Internet',
   }
 ]
 
-obappmenu.obAppMenu(data)
+obAppMenu.add(data)
+obAppMenu.render()
