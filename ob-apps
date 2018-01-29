@@ -2,50 +2,19 @@
 # -*- coding: utf-8 -*-
 
 import os
+import imp
 from obappmenu import obAppMenu
 
 HOMEDIR = os.path.expanduser('~/.config/openbox')
 RCNAME = 'obappmenurc.py'
 
-# A way to find local rcfile
-#if (os.path.isfile(os.path.join(HOMEDIR, RCNAME))):
-#  print "Found RC"
-#else:
-#  print "RC not found"
-# TODO where to store system rcfile?
+# FIXME load system-wide config
 
-data = [
-  {
-    'name': 'GVim',
-    'command': 'gvim',
-    'category': 'Editors',
-  },
-  {
-    'name': 'Firefox',
-    'command': 'firefox',
-    'category': 'Internet',
-  },
-  {
-    'name': 'VimBrowser',
-    'command': 'vimb',
-    'category': 'Internet',
-  },
-  {
-    'name': 'Thunderbird',
-    'command': 'thunderbird',
-    'category': 'Internet',
-  },
-  {
-    'name': 'Pidgin',
-    'command': 'pidgin',
-    'category': 'Internet',
-  },
-  {
-    'name': 'Gajim',
-    'command': 'gajim',
-    'category': 'Internet',
-  }
-]
+# Load user's config
+homerc = os.path.join(HOMEDIR, RCNAME)
+if (os.path.isfile(homerc)):
+  imp.load_source('obappmenurc_local', homerc)
+else:
+  open(homerc, 'a').close()
 
-obAppMenu.add(data)
 obAppMenu.render()
