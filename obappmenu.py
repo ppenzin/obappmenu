@@ -1,3 +1,17 @@
+""" Produce an openbox pipe menu from a list of items
+
+The goal is to get a simple (two-level menu) that would agreggate available applications by user-defined categorie.
+
+The format for an item is as follows:
+    'name': display name (optional)
+    'command': command to execute (will be displayed if no name is given)
+    'category': first-level menu to add this item to
+
+TODO:
+    - Aggregate menu from two locations (system-wide and user)
+    - Switch input to Yaml or use a better format
+"""
+
 try:
   from xml.etree import cElementTree as etree
 except ImportError:
